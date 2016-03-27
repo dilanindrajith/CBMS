@@ -1,0 +1,94 @@
+======================================================================================================================================
+                   Realtek High Definition Audio Driver
+======================================================================================================================================
+Command : "C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\DELLMUP.exe" /v" LOGFILE="C:\ProgramData\dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\DUP4D87.tmp""
+Date : 2015-10-8  8:37:11.387
+User : Dilan 
+======================================================================================================================================
+Starting to get initial ...
+[OS] : 10.0
+    -Build : 10240
+    -Service Pack : 0
+    -x64 system : 1
+    -MCE system : 0
+    -Server system : 0
+    -System Language ID : 0x0409
+    -User Language ID : 0x0409
+[Default Path] :
+    -tcRtkTempDir : C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00
+    -tcISSetupLocation : C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00
+
+Collecting inventory ...
+Checking driver version ...
+    [Realtek Audio Driver for DELL MUP Package]
+       MUP Package Version : 6.0.1.7520
+
+C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RealtekHDAudio\Vista64\RTKVHD64.sys
+    [Realtek HD Audio Driver]
+        Installed version : 
+        Package version : 6.0.1.7520
+
+Executing update ...    [2015-10-8  8:37:11.387]
+    Run Setup Command : C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RealtekHDAudio\Setup.exe  /z[-rpC:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RHDSetup.log]
+
+    -------- Realtek Installer response : C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RHDSetup.log --------
+[ResponseResult]
+ResultCode=0
+[Install Progress]
+ Confirm Realtek Driver 
+ Check Operation System Version 
+ OS Information [WINMAJOR Number] = 10
+ OS Information [WINMAJOR String] = 10.0
+ OS Information [SYSINFO.nWinMajor] = 10
+ OS Information [SYSINFO.nWinMinor] = 0
+ OS Information [IsWin2000] = 0
+ OS Information [IsWinXP] = 0
+ OS Information [IsWin2003] = 0
+ OS Information [IsVista] = 0
+ OS Information [IsWin2008] = 0
+ OS Information [IsWin7] = 0
+ OS Information [IsWin8] = 0
+ OS Information [IsWin8.1] = 0
+ OS Information [IsWin10] = 1
+ OS Information [IsWin2008R2x64] = 0
+ OS Information [IsMCE] = 0
+ OS Information [IsServer] = 0
+ OS Information [Service Pack] = 0
+ OS Information [x64] = 1
+ Operation System was Windows x64
+ Rtlupd [GetRtlupdForPackage] = 1
+ Rtlupd version [C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RealtekHDAudio\Vista64\RtlUpd64.exe] = 3.0.0.0
+ Rtkupd version [\] = 
+ Current use Rtlupd version [C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RealtekHDAudio\Vista64\RtlUpd64.exe] = 3.0.0.0
+ Default Path [WDMDir] = Vista64
+ Default Path [RtkAudioDir] = C:\Program Files (x86)\Realtek\Audio
+ Default Path [RtkAudioDir x64] = C:\Program Files\Realtek\Audio
+ Default Path [RtlTempDir] = C:\Program Files (x86)\Realtek\Audio\Drivers
+ Default Path [RtkHDADrvDir] = C:\Program Files (x86)\Realtek\Audio\Drivers\Vista64
+ Default Path [RtkHDMIDrvDir] = C:\Program Files (x86)\Realtek\Audio\Drivers\HDMI\XP2K
+ Default Path [RtlPFHDADir] = C:\Program Files\Realtek\Audio\HDA
+ Default Path [USBDrvDir] = C:\ProgramData\Dell\drivers\Audio_Driver_21H15_WN32_6.0.1.7520_A00\RealtekHDAudio\USBAud
+ Default Path [RtkUSBDrvDir] = C:\Program Files (x86)\Realtek\Audio\USBAud\Driver
+ Default Path [RtkIntelHDASSTPath] = C:\Program Files (x86)\Realtek\Audio\Drivers\IntelHDASST
+ Default Registry key [Installer Base Key] = SOFTWARE\Realtek\Audio\Installer
+ Current driver version = 6.0.1.7520  x64 Edition
+ 
+ InstallShield was aborted
+
+    -------- Realtek Installer response end --------
+
+Execution update completed    [2015-10-8  8:37:40.144]
+======================================================================================================================================
+
+[Update Result]...
+    Update ready to be applied at reboot .
+    Rtk Code = 0x00000000
+    IS Code = 0x80042000
+    Install Result = 0
+    UPD execution code = 
+    USB UPD execution code = 
+    SetupAPI running code = 
+
+Exit Code = 1603 ( Error )
+======================================================================================================================================
+End : 2015-10-8  8:37:40.144
