@@ -1,19 +1,23 @@
 package com.cbms.testing;
 
-import static org.junit.Assert.*;
-
 import org.junit.Test;
 
-public class LoginBeanTest {
+import com.cbms.web.login.LoginBean;
+
+import junit.framework.TestCase;
+
+public class LoginBeanTest extends TestCase {
 
 	@Test
 	public void testDoLogin() {
-		fail("Not yet implemented");
+		LoginBean login = new LoginBean();
+		assertEquals("/login.xhtml?faces-redirect=true",login.doHome());
 	}
 
 	@Test
 	public void testDoLogout() {
-		fail("Not yet implemented");
+		LoginBean login = new LoginBean();
+		
 	}
 
 	@Test
