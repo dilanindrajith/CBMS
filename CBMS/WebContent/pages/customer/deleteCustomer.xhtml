@@ -1,0 +1,161 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createCustomer.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="modifyCustomer.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteCustomer.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewCustomer.xhtml?param=search" />
+		</p:menubar>
+		<p:dataTable id="customerTable" var="customer" style="border:none"
+			value="#{ViewCustomerBean.displayList}"
+			selection="#{ViewCustomerBean.selectedList}"
+			rowKey="#{customer.custId}" editable="false"
+			emptyMessage="No Customers found with given criteria"
+			filteredValue="#{ViewCustomerBean.filteredList}"
+			resizableColumns="false" rows="10" paginator="true"
+			paginatorPosition="bottom" reflow="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,20,50,100">
+			<f:facet name="header">
+           					Delete Customer
+        				</f:facet>
+
+			<p:column headerText="Cust ID *" filterBy="#{customer.custId}"
+				sortBy="#{customer.custId}" filterMatchMode="contains">
+				<h:outputText value="#{customer.custId}" />
+			</p:column>
+
+			<p:column headerText="Name *" filterBy="#{customer.name}"
+				sortBy="#{customer.name}" filterMatchMode="contains">
+				<h:outputText value="#{customer.name}" />
+			</p:column>
+
+			<p:column headerText="City" filterBy="#{customer.city}"
+				sortBy="#{customer.city}" filterMatchMode="contains">
+				<h:outputText value="#{customer.city}" />
+			</p:column>
+
+			<p:column headerText="Phone Mobile *"
+				filterBy="#{customer.phoneMobile}" sortBy="#{customer.phoneMobile}"
+				filterMatchMode="contains">
+				<h:outputText value="#{customer.phoneMobile}" />
+			</p:column>
+
+			<p:column headerText="Address" filterBy="#{customer.address}"
+				sortBy="#{customer.address}" filterMatchMode="contains">
+				<h:outputText value="#{customer.address}" />
+			</p:column>
+
+			<p:column selectionMode="multiple" style=" text-align:center"
+				headerText="Select" />
+
+			<f:facet name="footer">
+				<p:commandButton value="Delete" styleClass="RedButton"
+					onstart="PF('Dialog').show()" />
+			</f:facet>
+
+			<p:column style=" text-align: center" headerText="More Info">
+				<p:commandButton update=":form:panel" onstart="PF('Dialog2').show()"
+					icon="ui-icon-search" title="View">
+					<f:setPropertyActionListener value="#{customer}"
+						target="#{ViewCustomerBean.selectedObj}" />
+				</p:commandButton>
+			</p:column>
+
+		</p:dataTable>
+
+		<p:dialog header="Customer Information" widgetVar="Dialog2"
+			modal="false" showEffect="clip" hideEffect="clip" resizable="false"
+			minimizable="true" closeOnEscape="true" height="300" width="500">
+			<h:panelGrid id="panel" columns="4" style="margin:0 auto;">
+
+				<h:outputText value="Customer Name" />
+				<h:outputText value="#{ViewCustomerBean.customerName}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Phone Mobile" />
+				<h:outputText value="#{ViewCustomerBean.phnMobile}"
+					style="font-weight:bold" />
+
+				<h:outputText value="City" />
+				<h:outputText value="#{ViewCustomerBean.city}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Phone Office" />
+				<h:outputText value="#{ViewCustomerBean.phnOffice}"
+					style="font-weight:bold" />
+
+				<h:outputText value="NIC/PP/DR" />
+				<h:outputText value="#{ViewCustomerBean.nic}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Skype " />
+				<h:outputText value="#{ViewCustomerBean.skypeId}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Viber " />
+				<h:outputText value="#{ViewCustomerBean.viberId}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Email " />
+				<h:outputText value="#{ViewCustomerBean.email}"
+					style="font-weight:bold" />
+
+				<h:outputText value="Address " />
+				<h:outputText value="#{ViewCustomerBean.custAddress}"
+					style="font-weight:bold" />
+
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:dialog header="Confirm Delete" widgetVar="Dialog" resizable="false"
+			showEffect="fade" hideEffect="drop" modal="false">
+			<h:panelGrid id="display" columns="2" cellpadding="12"
+				style="margin:0 auto;">
+				<p:row icon="ui-icon-alert">
+					<h:outputText value="Are you sure you want to permanently delete?" />
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:commandButton value="Yes" styleClass="RedButton"
+							actionListener="#{ViewCustomerBean.deleteCustomer}"
+							update="customerTable" oncomplete="PF('Dialog').hide()" />
+					</p:column>
+					<p:column>
+						<p:commandButton value="No" styleClass="GreenButton"
+							onclick="Dialog.hide()" />
+					</p:column>
+				</p:row>
+			</h:panelGrid>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

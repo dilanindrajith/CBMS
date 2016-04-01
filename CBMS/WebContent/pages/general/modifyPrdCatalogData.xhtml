@@ -1,0 +1,115 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+			<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createProductCatalog.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="updateProductCatalog.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteProductCatalog.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewProductCatalog.xhtml?param=view" />
+		</p:menubar>
+		<div class="Container100">
+			<div class="ContainerIndent">
+				<h:panelGrid id="panel" columns="4" cellpadding="5">
+
+					<h:outputLabel value="Product Name * " />
+					<p:inputTextarea id="pName"
+						value="#{ModifyProductCatalogBean.productName}">
+					</p:inputTextarea>
+
+					<h:outputLabel value="Description " />
+					<p:inputTextarea id="des"
+						value="#{ModifyProductCatalogBean.description}" rows="3" cols="21">
+					</p:inputTextarea>
+
+					<h:outputLabel value=" Product Code * " />
+					<p:inputText id="name"
+						value="#{ModifyProductCatalogBean.productCode}">
+					</p:inputText>
+
+					<h:outputLabel value="User Define Code * " />
+					<p:inputText id="userdef"
+						value="#{ModifyProductCatalogBean.userDefineCode}">
+					</p:inputText>
+
+					<h:outputLabel value="Purchasing Price * " />
+					<p:inputText id="purchs"
+						value="#{ModifyProductCatalogBean.purchasePrice}">
+					</p:inputText>
+
+					<h:outputLabel value="Selling Price * " />
+					<p:inputText id="sale"
+						value="#{ModifyProductCatalogBean.salePrice}">
+					</p:inputText>
+
+					<h:outputLabel value="Warranty (Weeks)" />
+					<p:inputText id="warranty"
+						value="#{ModifyProductCatalogBean.warranty}">
+					</p:inputText>
+
+
+					<h:outputLabel value="Shelf Life " />
+					<p:inputText id="shelf"
+						value="#{ModifyProductCatalogBean.shelfLife}">
+					</p:inputText>
+
+					<h:outputLabel value="Rack No " />
+					<p:inputText id="rno" value="#{ModifyProductCatalogBean.rackNo}">
+					</p:inputText>
+
+					<h:outputLabel value="Quantity " />
+					<p:inputText id="qty" required="true"
+						value="#{ModifyProductCatalogBean.qty}"
+						validatorMessage="Quantity Max Limit Exceeded - Max Limit is 4 Characters">
+						<f:validateLength maximum="4" for="qty" />
+					</p:inputText>
+
+					<f:facet name="footer">
+						<p:commandButton value="Edit" icon="ui-icon-check"
+							actionListener="#{ModifyProductCatalogBean.editProductCatalog}"
+							update="panel,growl" style="margin:0" />
+						<p:spacer width="20" height="20" />
+						<p:commandButton value="Cancel" icon="ui-icon-check"
+							actionListener="#{ModifyProductCatalogBean.cancelProductCatalog}"
+							onclick="PF('Dialog').hide()" update="panel,growl"
+							style="margin:0" />
+
+						<p:spacer width="20" height="20" />
+
+						<p:button
+							href="/pages/general/modifyPrdCatalog.xhtml?param=modify"
+							value="Home" icon="ui-icon-home" />
+
+					</f:facet>
+				</h:panelGrid>
+			</div>
+		</div>
+	</ui:define>
+</ui:composition>

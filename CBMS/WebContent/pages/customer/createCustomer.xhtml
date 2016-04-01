@@ -1,0 +1,140 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+
+	</ui:define>
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createCustomer.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="modifyCustomer.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteCustomer.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewCustomer.xhtml?param=search" />
+		</p:menubar>
+		<p:spacer height="1%" width="1%"></p:spacer>
+		<h:form>
+			<p:growl id="growl" sticky="true" showDetail="true" />
+
+			<p:fieldset id="custfieldset" legend="Create Customer" toggleable="false">
+
+				<h:outputText value="&#160;" />
+				<div class="container">
+					<div class="row">
+						<div class=" col-md-2">
+							<p:outputLabel for="cusName" value="Customer Name:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="cusName" value="#{CreateCustomerBean.name}" />
+						</div>
+
+					</div>
+
+					<h:outputText value="&#160;" />
+					<div class="row">
+						<div class=" col-md-2">
+							<p:outputLabel for="phoneMobile" value="Phone Mobile:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="phoneMobile"
+								value="#{CreateCustomerBean.phnMobile}" />
+						</div>
+
+						<div class=" col-md-2">
+							<p:outputLabel for="phoneOffice" value="Phone Office:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="phoneOffice"
+								value="#{CreateCustomerBean.phnOffice}" />
+						</div>
+					</div>
+
+					<h:outputText value="&#160;" />
+					<div class="row">
+
+						<div class=" col-md-2">
+							<p:outputLabel for="city" value="City:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="city" value="#{CreateCustomerBean.city}" />
+						</div>
+						<div class=" col-md-2">
+
+							<p:outputLabel for="viber" value="Viber:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="viber" value="#{CreateCustomerBean.viberId}" />
+						</div>
+					</div>
+					<h:outputText value="&#160;" />
+
+					<div class="row">
+						<div class=" col-md-2">
+							<p:outputLabel for="skype" value="Skype:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="skype" value="#{CreateCustomerBean.skypeId}" />
+						</div>
+
+						<div class=" col-md-2">
+							<p:outputLabel for="email" value="Email:" />
+						</div>
+						<div class=" col-md-3">
+							<p:inputText id="email" value="#{CreateCustomerBean.email}" />
+						</div>
+					</div>
+					<h:outputText value="&#160;" />
+
+					<div class="row">
+
+
+						<div class=" col-md-2">
+							<p:outputLabel for="address" value="Address: " />
+						</div>
+						<div class=" col-md-3">
+							<p:inputTextarea id="address" rows="2" cols="19"
+								value="#{CreateCustomerBean.address}" />
+						</div>
+					</div>
+					<h:outputText value="&#160;" />
+					<div class="row">
+
+						<h:outputText value="&#160;" />
+					</div>
+				</div>
+				<p:spacer width="0" height="10" />
+				<div class="btn-group inline">
+					<p:commandButton value="Create" icon="ui-icon-check"
+						actionListener="#{CreateCustomerBean.addCustomer}" update="growl,custfieldset" />
+				</div>
+				<p:spacer width="0" height="50" />
+				<div class="btn-group inline">
+					<p:commandButton value="Reset" icon="ui-icon-check" />
+				</div>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>

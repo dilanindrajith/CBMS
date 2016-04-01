@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createCustomer.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="modifyCustomer.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteCustomer.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewCustomer.xhtml?param=search" />
+		</p:menubar>
+		<p:dataTable id="customerTable" var="customer" style="border:none"
+			value="#{ModifyCustomerBean.displayList}"
+			selection="#{ModifyCustomerBean.selectedObj}"
+			rowKey="#{customer.custId}" editable="true"
+			emptyMessage="No Customers found with given criteria"
+			filteredValue="#{ModifyCustomerBean.filteredList}"
+			resizableColumns="false" rows="10" paginator="true"
+			paginatorPosition="bottom" reflow="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,20,50,100">
+			<f:facet name="header">
+           					Modify Customer
+        				</f:facet>
+
+			<p:column headerText="Cust ID *" filterBy="#{customer.custId}"
+				sortBy="#{customer.custId}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.custId}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{customer.custId}" disabled="true"
+							required="true" requiredMessage="Name is Required"
+							validatorMessage="ID Max Limit Exceeded - Max Limit is 20 Characters">
+							<f:validateLength maximum="20" for="custId" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Name *" filterBy="#{customer.name}"
+				sortBy="#{customer.name}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.name}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{customer.name}" required="true"
+							requiredMessage="Name is Required"
+							validatorMessage="Name Max Limit Exceeded - Max Limit is 20 Characters">
+							<f:validateLength maximum="20" for="name" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+
+			<p:column headerText="City" filterBy="#{customer.city}"
+				sortBy="#{customer.city}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.city}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{customer.city}"
+							validatorMessage="City Max Limit Exceeded - Max Limit is 20 Characters">
+							<f:validateLength maximum="20" for="city" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Phone Mobile *"
+				filterBy="#{customer.phoneMobile}" sortBy="#{customer.phoneMobile}"
+				filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.phoneMobile}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{customer.phoneMobile}" required="true"
+							requiredMessage="Phone Mobile is Required"
+							validatorMessage="Invalid Phone Mobile">
+							<f:validateLength minimum="10" maximum="15" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column headerText="Address *" filterBy="#{customer.address}"
+				sortBy="#{customer.address}" filterMatchMode="contains">
+				<p:cellEditor>
+					<f:facet name="output">
+						<h:outputText value="#{customer.address}" />
+					</f:facet>
+					<f:facet name="input">
+						<p:inputText value="#{customer.address}" required="true"
+							requiredMessage="Address is Required"
+							validatorMessage="Address Max Limit Exceeded - Max Limit is 100 Characters">
+							<f:validateLength maximum="100" for="address" />
+						</p:inputText>
+					</f:facet>
+				</p:cellEditor>
+			</p:column>
+
+			<p:column style=" text-align: center;" headerText="Edit">
+				<p:commandButton styleClass="OrangeButton" icon="ui-icon-pencil"
+					value="Modify" title="Modify">
+					<f:setPropertyActionListener value="#{customer}"
+						target="#{ModifyCustomerBean.selectedObj}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+	</ui:define>
+</ui:composition>

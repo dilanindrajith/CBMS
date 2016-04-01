@@ -1,0 +1,308 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createSaleInv.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="modifySaleInv.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteSaleInv.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewSaleInv.xhtml?param=view_print" />
+		</p:menubar>
+		<h:panelGrid id="grid1" columns="6" cellpadding="4">
+			<p:outputLabel for="from" value="From Date:" />
+			<p:calendar id="from" value="#{ViewSalesInvoiceBean.fromDate}" />
+
+			<p:outputLabel for="to" value="To Date:" />
+			<p:calendar id="to" value="#{ViewSalesInvoiceBean.toDate}" />
+
+			<p:spacer width="10" />
+
+			<p:commandButton value="Search" id="btnSearch"
+				update=":form:growl,:form:saleInvTable"
+				actionListener="#{ViewSalesInvoiceBean.searchSaleInvoice}"
+				styleClass="ui-priority-primary" />
+
+		</h:panelGrid>
+
+
+		<p:dataTable id="saleInvTable" var="SaleInvHeader" style="border:none"
+			value="#{ViewSalesInvoiceBean.displayHedList}"
+			selection="#{ViewSalesInvoiceBean.selectedHedObj}"
+			rowKey="#{SaleInvHeader.saleInvId}" editable="false"
+			emptyMessage="No Sale Invoice found with given criteria"
+			filteredValue="#{ViewSalesInvoiceBean.filteredHedList}"
+			resizableColumns="false" rows="10" paginator="true"
+			paginatorPosition="bottom" reflow="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,20,50,100"
+			rowStyleClass="#{SaleInvHeader.statCode eq 1 ? 'valid' :	SaleInvHeader.statCode eq 9 ? 'deleted' :null}">
+
+			<f:facet name="header">
+           					Search Sales Invoice 
+        				</f:facet>
+
+			<p:column headerText="Invoice Id"
+				filterBy="#{SaleInvHeader.saleInvId}"
+				sortBy="#{SaleInvHeader.saleInvId}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.saleInvId}" />
+			</p:column>
+
+			<p:column headerText="Remark" filterBy="#{SaleInvHeader.hdrRemark}"
+				sortBy="#{SaleInvHeader.hdrRemark}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.hdrRemark}" />
+			</p:column>
+
+			<p:column headerText="Cust.ID"
+				filterBy="#{SaleInvHeader.customer.custId}"
+				sortBy="#{SaleInvHeader.customer.custId}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.customer.custId}" />
+			</p:column>
+
+			<p:column headerText="Cust.Name"
+				filterBy="#{SaleInvHeader.customer.name}"
+				sortBy="#{SaleInvHeader.customer.name}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.customer.name}" />
+			</p:column>
+
+			<p:column headerText="Phone Mobile"
+				filterBy="#{SaleInvHeader.customer.phoneMobile}"
+				sortBy="#{SaleInvHeader.customer.phoneMobile}"
+				filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.customer.phoneMobile}" />
+			</p:column>
+
+			<p:column headerText="SI Date " filterBy="#{SaleInvHeader.invDate}"
+				sortBy="#{SaleInvHeader.invDate}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.invDate}" />
+			</p:column>
+
+			<p:column headerText="Grand Total "
+				filterBy="#{SaleInvHeader.grandTotal}"
+				sortBy="#{SaleInvHeader.grandTotal}" filterMatchMode="contains">
+				<h:outputText value="#{SaleInvHeader.grandTotal}" />
+			</p:column>
+
+			<p:column headerText="Status" filterBy="#{SaleInvHeader.statCode}"
+				sortBy="#{SaleInvHeader.statCode}" filterMatchMode="contains"
+				styleClass="statCode">
+				<h:outputText
+					value="#{SaleInvHeader.statCode == 9 ? 'Deleted' : 'Active'}" />
+			</p:column>
+
+			<p:column style=" text-align: center" headerText="More Info">
+				<p:commandButton update=":form:confirmPnl"
+					onstart="PF('Dialog2').show()" icon="ui-icon-search" title="View">
+					<f:setPropertyActionListener value="#{SaleInvHeader}"
+						target="#{ViewSalesInvoiceBean.selectedHedObj}" />
+				</p:commandButton>
+			</p:column>
+		</p:dataTable>
+
+		<p:dialog header="Sales Invoice Information" widgetVar="Dialog2"
+			modal="false" showEffect="clip" hideEffect="clip" height="500"
+			width="975" resizable="false" minimizable="true" closeOnEscape="true">
+
+			<p:panel id="confirmPnl">
+				<p:panel>
+					<h:panelGrid columns="2">
+						<h:outputLabel value="Name" styleClass="ensky_themetext" />
+						<h:outputLabel value="Helios (Pvt) Ltd."
+							styleClass="ensky_themetext" />
+
+						<h:outputLabel value="Address :" styleClass="ensky_themetext" />
+						<h:outputLabel value="No 103/2, Colombo Road, Gampaha."
+							styleClass="ensky_themetext" />
+
+						<h:outputLabel value="Tel :" styleClass="ensky_themetext" />
+						<h:outputLabel value=" 0112456852 / 0775268456"
+							styleClass="ensky_themetext" />
+
+						<h:outputLabel value="Email :" styleClass="ensky_themetext" />
+						<h:outputLabel value="info@helios.lk" styleClass="ensky_themetext" />
+
+						<h:outputLabel value="Branch :" styleClass="ensky_themetext" />
+						<h:outputLabel value="Gampaha" styleClass="ensky_themetext" />
+					</h:panelGrid>
+				</p:panel>
+				<h:panelGrid columns="4" cellspacing="5" cellpadding="5"
+					style="margin-left:1%">
+
+					<h:outputText
+						style="font-weight: bold;font-family: Times New Roman;font-size: 14px;"
+						value="#{ViewSalesInvoiceBean.hedding}" styleClass="outputLabel" />
+
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+
+					<h:outputText value="Invoice Date : " styleClass="ensky_themetext" />
+					<p:calendar value="#{ViewSalesInvoiceBean.invDate}" disabled="true" />
+
+					<h:outputText value="Customer Name : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.custName}" />
+
+					<h:outputText value="Ref SO No : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.selectedSoId}" />
+
+					<h:outputText value="Address : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.custAddress}" />
+
+					<h:outputText value="Invoice Remark : "
+						styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.detRemark}" />
+
+					<h:outputText value="City : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.custCity}" />
+
+					<h:outputText value="Tel : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.custMobile} / #{ViewSalesInvoiceBean.custPhonOffice}" />
+
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+
+					<h:outputText value="Sub Total : " styleClass="ensky_themetext" />
+					<h:outputText id="subTot" styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.subTotal}" />
+
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+
+					<h:outputText value="NBT : " styleClass="ensky_themetext" />
+					<h:outputText id="nbt" styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.nbtTotal}" />
+
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+
+					<h:outputText value="VAT : " styleClass="ensky_themetext" />
+					<h:outputText id="vat" styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.vatTotal}" />
+
+					<h:outputText value="&#160;" />
+					<h:outputText value="&#160;" />
+
+					<h:outputText value="Grand Total : " styleClass="ensky_themetext" />
+					<h:outputText id="grandTot" styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.grandTotal}" />
+
+					<h:outputText value="Remark : " styleClass="ensky_themetext" />
+					<h:outputText styleClass="ensky_themetext"
+						value="#{ViewSalesInvoiceBean.hdrRemark}" />
+
+
+				</h:panelGrid>
+
+				<p:dataTable id="item" var="SaleInvDetail"
+					value="#{ViewSalesInvoiceBean.displaySiDetList}"
+					rowKey="#{SaleInvDetail.saleInvDetId}" editable="false"
+					emptyMessage="No Item found with given criteria">
+					<f:facet name="header">
+           					 Products
+        				</f:facet>
+					<p:column headerText="Product Code" style="font-size:14px"
+						styleClass="wrap">
+						<h:outputText value="#{SaleInvDetail.productCatalog.prdCode}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Product Name" style="font-size:14px"
+						styleClass="wrap">
+						<h:outputText value="#{SaleInvDetail.productCatalog.prdName}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Product Remark" style="font-size:14px"
+						styleClass="wrap">
+						<h:outputText value="#{SaleInvDetail.detRemark}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Unit Price" style="width:15%;font-size:14px">
+						<h:outputText value="#{SaleInvDetail.unitPrice}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Quantity" style="width:15%;font-size:14px">
+						<h:outputText value="#{SaleInvDetail.quantity}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Total" style="width:15%;font-size:14px">
+						<h:outputText value="#{SaleInvDetail.total}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Discount" style="width:15%;font-size:14px">
+						<h:outputText value="#{SaleInvDetail.discount}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+					<p:column headerText="Net Total" style="width:15%;font-size:14px">
+						<h:outputText value="#{SaleInvDetail.netTotal}"
+							styleClass="ensky_themetext" />
+					</p:column>
+
+				</p:dataTable>
+				<p:spacer height="30" width="30" />
+				<h:panelGrid columns="5">
+					<h:outputLabel value="--------------------------" />
+					<p:spacer width="15" />
+					<h:outputLabel value="--------------------------" />
+					<p:spacer width="15" />
+					<h:outputLabel value="--------------------------" />
+					<h:outputLabel value="Prepared By" styleClass="ensky_theme" />
+					<p:spacer width="15" />
+					<h:outputLabel value="Checked By" styleClass="ensky_theme" />
+					<p:spacer width="15" />
+					<h:outputLabel value="Authorized By" styleClass="ensky_theme" />
+
+				</h:panelGrid>
+			</p:panel>
+			<p:panel style="border:none">
+				<h:panelGrid id="grid_con" columns="2">
+					<p:commandButton value="Print" type="button"
+						disabled="#{ViewSalesInvoiceBean.hidePrintBtn}"
+						icon="ui-icon-print">
+						<p:printer target="confirmPnl" />
+					</p:commandButton>
+
+					<p:button href="/xhtml/customer/modifySaleInv.xhtml?param=modify"
+						value="Home" icon="ui-icon-home" />
+				</h:panelGrid>
+			</p:panel>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

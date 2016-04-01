@@ -1,0 +1,82 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+
+		<p:panel header="Customer Registration">
+			<h:panelGrid id="cust_pnl_grd" columns="4" cellpadding="5">
+				<h:outputLabel for="name" value="Customer Name * " />
+				<p:inputText id="name" value="#{ModifyCustomerBean.customerName}"
+					required="true" requiredMessage="Customer Name is Required"
+					validatorMessage="Name Max Limit Exceeded - Max Limit is 50 Characters">
+					<f:validateLength maximum="50" for="name" />
+				</p:inputText>
+
+				<h:outputLabel for="pMobile" value="Phone Mobile * " />
+				<p:inputText id="pMobile" value="#{ModifyCustomerBean.phnMobile}"
+					required="true" requiredMessage="Mobile Phone No is Required"
+					validatorMessage="Phone Mobile Max Limit Exceeded - Max Limit is 15">
+					<f:validateLength minimum="5" maximum="15" />
+				</p:inputText>
+
+				<h:outputLabel for="pOffice" value="Phone Office " />
+				<p:inputText id="pOffice" value="#{ModifyCustomerBean.phnOffice}"
+					validatorMessage="Phone Office Max Limit Exceeded - Max Limit is 15">
+					<f:validateLength minimum="5" maximum="15" />
+				</p:inputText>
+
+				<h:outputLabel for="city" value="City " />
+				<p:inputText id="city" value="#{ModifyCustomerBean.city}"
+					validatorMessage="City Max Limit Exceeded - Max Limit is 20 Characters">
+					<f:validateLength maximum="20" for="city" />
+				</p:inputText>
+
+				<h:outputLabel for="skypeid" value="Skype" />
+				<p:inputText id="skypeid" value="#{ModifyCustomerBean.skypeId}"
+					validatorMessage="Skype ID Max Limit Exceeded - Max Limit is 20">
+					<f:validateLength maximum="20" />
+				</p:inputText>
+
+				<h:outputLabel for="email" value="Email " />
+				<p:inputText id="email" value="#{ModifyCustomerBean.email}"
+					validatorMessage="Invalid E-mail">
+				</p:inputText>
+
+				<h:outputLabel for="viberid" value="Viber" />
+				<p:inputText id="viberid" value="#{ModifyCustomerBean.viberId}"
+					validatorMessage="Viber Id Max Limit Exceeded - Max Limit is 20">
+					<f:validateLength maximum="20" />
+				</p:inputText>
+
+				<h:outputLabel value="Address * " />
+				<p:inputTextarea rows="3" cols="19"
+					value="#{ModifyCustomerBean.custAddress}" maxlength="200"
+					counterTemplate="{0} characters remaining." autoResize="false"
+					required="true" requiredMessage="Address is Required" />
+
+				<f:facet name="footer">
+					<p:commandButton value="Submit" icon="ui-icon-check"
+						actionListener="#{ModifyCustomerBean.editCustomer}"
+						update="cust_pnl_grd,growl" style="margin:0" />
+					<p:spacer width="20" height="20" />
+
+					<p:commandButton type="reset" value="Reset" icon="ui-icon-check"
+						style="margin:0" />
+
+					<p:spacer width="20" height="20" />
+
+					<p:button href="/pages/customer/modifyCustomer.xhtml?param=modify"
+						value="Home" icon="ui-icon-home" />
+						
+				</f:facet>
+			</h:panelGrid>
+		</p:panel>
+	</ui:define>
+</ui:composition>
+

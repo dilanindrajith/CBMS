@@ -1,0 +1,184 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+			<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createProductCatalog.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="updateProductCatalog.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteProductCatalog.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewProductCatalog.xhtml?param=view" />
+		</p:menubar>
+		<p:dataTable id="productTable" var="ProductCatalog"
+			style="border:none" value="#{ViewProductCatalogBean.displayList}"
+			selection="#{ViewProductCatalogBean.selectedList}"
+			rowKey="#{ProductCatalog.prdCatlogId}" editable="false"
+			emptyMessage="No Product Catalog found with given criteria"
+			filteredValue="#{ViewProductCatalogBean.filteredList}"
+			resizableColumns="false" rows="10" paginator="true"
+			paginatorPosition="bottom" reflow="true"
+			paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+			rowsPerPageTemplate="10,20,50,100">
+			<f:facet name="header">
+           					Delete Products
+        				</f:facet>
+
+			<p:column headerText="Product Name"
+				filterBy="#{ProductCatalog.prdName}"
+				sortBy="#{ProductCatalog.prdName}" filterMatchMode="contains">
+				<h:outputText value="#{ProductCatalog.prdName}" />
+			</p:column>
+
+			<p:column headerText="Product Code"
+				filterBy="#{ProductCatalog.prdCode}"
+				sortBy="#{ProductCatalog.prdCode}" filterMatchMode="contains">
+				<h:outputText value="#{ProductCatalog.prdCode}" required="false">
+				</h:outputText>
+			</p:column>
+
+			<p:column headerText="Purchasing Price"
+				filterBy="#{ProductCatalog.purchasePrice}"
+				sortBy="#{ProductCatalog.purchasePrice}" filterMatchMode="contains">
+				<h:outputText value="#{ProductCatalog.purchasePrice}" />
+			</p:column>
+
+			<p:column headerText="Selling Price"
+				filterBy="#{ProductCatalog.salePrice}"
+				sortBy="#{ProductCatalog.salePrice}" filterMatchMode="contains">
+				<h:outputText value="#{ProductCatalog.salePrice}" />
+			</p:column>
+
+			<p:column headerText="Stock Count"
+				filterBy="#{ProductCatalog.qtyInHand}"
+				sortBy="#{ProductCatalog.qtyInHand}" filterMatchMode="contains">
+				<h:outputText value="#{ProductCatalog.qtyInHand}" />
+			</p:column>
+
+			<p:column selectionMode="multiple" style=" text-align:center"
+				headerText="Select" />
+
+			<p:column style=" text-align: center" headerText="More Info">
+				<p:commandButton update=":form:panel" onstart="PF('Dialog1').show()"
+					icon="ui-icon-search" title="View">
+					<f:setPropertyActionListener value="#{ProductCatalog}"
+						target="#{ViewProductCatalogBean.selectedObj}" />
+				</p:commandButton>
+			</p:column>
+
+			<f:facet name="footer">
+				<p:commandButton value="Delete" styleClass="RedButton"
+					onstart="PF('Dialog').show()" />
+			</f:facet>
+		</p:dataTable>
+
+		<p:dialog header="Product Information" widgetVar="Dialog1"
+			modal="false" showEffect="clip" hideEffect="clip"
+			closeOnEscape="true" resizable="false" minimizable="true">
+			<h:panelGrid id="panel" columns="5" cellpadding="5">
+
+				<h:outputLabel value="Product Name * " />
+				<p:inputTextarea id="pName" disabled="true"
+					value="#{ViewProductCatalogBean.productName}">
+				</p:inputTextarea>
+
+				<p:spacer width="30" />
+
+				<h:outputLabel value="Description " />
+				<p:inputTextarea id="des" disabled="true"
+					value="#{ViewProductCatalogBean.description}">
+				</p:inputTextarea>
+
+				<h:outputLabel value=" Product Code * " />
+				<p:inputText id="name" disabled="true"
+					value="#{ViewProductCatalogBean.productCode}">
+				</p:inputText>
+
+				<p:spacer width="30" />
+
+				<h:outputLabel value="User Define Code * " />
+				<p:inputText id="userdef" disabled="true"
+					value="#{ViewProductCatalogBean.userDefineCode}">
+				</p:inputText>
+
+				<h:outputLabel value="Purchasing Price * " />
+				<p:inputText id="purchasePrice" disabled="true"
+					value="#{ViewProductCatalogBean.purchasePrice}">
+				</p:inputText>
+
+				<p:spacer width="30" />
+
+				<h:outputLabel value="Selling Price * " />
+				<p:inputText id="salePrice" disabled="true"
+					value="#{ViewProductCatalogBean.salePrice}">
+				</p:inputText>
+
+				<h:outputLabel value="Warranty (Weeks) " />
+				<p:inputText id="warranty" disabled="true"
+					value="#{ViewProductCatalogBean.warranty}">
+				</p:inputText>
+
+				<p:spacer width="30" />
+
+				<h:outputLabel value="Shelf Life " />
+				<p:inputText id="shelf" disabled="true"
+					value="#{ViewProductCatalogBean.shelfLife}">
+				</p:inputText>
+
+				<h:outputLabel value="Rack No " />
+				<p:inputText id="rno" disabled="true"
+					value="#{ViewProductCatalogBean.rackNo}">
+				</p:inputText>
+
+				<p:spacer width="30" />
+
+			</h:panelGrid>
+		</p:dialog>
+
+		<p:dialog header="Confirm Delete" widgetVar="Dialog" resizable="false"
+			showEffect="fade" hideEffect="drop" modal="false">
+			<h:panelGrid id="display" columns="2" cellpadding="12"
+				style="margin:0 auto;">
+				<p:row icon="ui-icon-alert">
+					<h:outputText value="Are you sure you want to permanently delete?" />
+				</p:row>
+				<p:row>
+					<p:column>
+						<p:commandButton value="Yes" styleClass="RedButton"
+							actionListener="#{ViewProductCatalogBean.deleteProductCatalog}"
+							update="productTable" oncomplete="PF('Dialog').hide()" />
+					</p:column>
+					<p:column>
+						<p:commandButton value="No" styleClass="GreenButton"
+							onclick="Dialog.hide()" />
+					</p:column>
+				</p:row>
+			</h:panelGrid>
+		</p:dialog>
+	</ui:define>
+</ui:composition>

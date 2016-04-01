@@ -1,0 +1,561 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+	</ui:define>
+
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createSaleInv.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="modifySaleInv.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteSaleInv.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewSaleInv.xhtml?param=view_print" />
+		</p:menubar>
+		<p:wizard flowListener="#{ModifySalesInvoiceBean.onFlowProcess}">
+			<p:tab id="general" title="General" style="border:none">
+				<div class="Container100">
+					<div class="ContainerIndent">
+						<p:panel header="Modify Sales Invoice">
+							<p:messages />
+							<h:panelGrid id="grid" columns="4" cellpadding="5">
+
+								<h:outputText value="Customer Name*" />
+								<p:selectOneMenu id="Customer" required="true"
+									requiredMessage="Customer is Required"
+									value="#{ModifySalesInvoiceBean.selectedCustId}"
+									style="width:125px">
+									<f:selectItem itemLabel="Select" itemValue="" />
+									<f:selectItems value="#{ModifySalesInvoiceBean.custList}"
+										var="obj" itemLabel="#{obj.name}" itemValue="#{obj.custId}" />
+									<p:ajax listener="#{ModifySalesInvoiceBean.onCustomerChange}"
+										update="cusPhoneMobile,custPhonOffice,custCity,cusaddress,refSo" />
+								</p:selectOneMenu>
+
+								<h:outputLabel for="refSo" value="Ref SO No" />
+								<p:selectOneMenu id="refSo"
+									value="#{ModifySalesInvoiceBean.selectedSoId}"
+									style="width:90%">
+									<p:ajax listener="#{ModifySalesInvoiceBean.onSOChange}" />
+									<f:selectItem itemLabel="Select" itemValue="" />
+									<f:selectItems value="#{ModifySalesInvoiceBean.salesOdrList}"
+										var="obj" itemLabel="#{obj.soId}" itemValue="#{obj.soId}" />
+								</p:selectOneMenu>
+
+								<h:outputLabel for="cusPhoneMobile" value="Phone Mobile" />
+								<p:inputText disabled="true" id="cusPhoneMobile"
+									value="#{ModifySalesInvoiceBean.custMobile}">
+									<f:validateLength maximum="15" for="cusPhoneMobile" />
+								</p:inputText>
+
+								<h:outputLabel for="custPhonOffice" value="Phone Office" />
+								<p:inputText disabled="true" id="custPhonOffice"
+									value="#{ModifySalesInvoiceBean.custPhonOffice}">
+									<f:validateLength maximum="15" for="custPhonOffice" />
+								</p:inputText>
+
+								<h:outputLabel for="custCity" value="City " />
+								<p:inputText disabled="true" id="custCity"
+									value="#{ModifySalesInvoiceBean.custCity}">
+								</p:inputText>
+
+								<h:outputLabel for="cusaddress" value="Address: " />
+								<p:inputTextarea disabled="true" rows="3" cols="21"
+									value="#{ModifySalesInvoiceBean.custAddress}"
+									autoResize="false" id="cusaddress" />
+
+								<p:outputLabel for="invDate" value="Invoice Date" />
+								<p:calendar id="invDate"
+									value="#{ModifySalesInvoiceBean.invDate}" required="true"
+									requiredMessage="Invoice Date is Required" />
+
+								<h:outputLabel for="hdrRemark" value="Remark " />
+								<p:inputTextarea rows="3" cols="21"
+									value="#{ModifySalesInvoiceBean.hdrRemark}" autoResize="false"
+									id="hdrRemark" />
+
+							</h:panelGrid>
+						</p:panel>
+					</div>
+				</div>
+			</p:tab>
+
+			<p:tab id="addToCart" title="Add To Cart">
+				<p:panel header="Modify Customer Invoice">
+					<p:messages />
+					<h:panelGrid id="grid_prd" columns="4" cellpadding="5">
+						<h:outputText value="Product Name *" />
+						<p:selectOneMenu id="Product"
+							value="#{ModifySalesInvoiceBean.selectedPrdId}"
+							style="width:125px">
+							<f:selectItem itemLabel="Select" itemValue="" />
+							<f:selectItems value="#{ModifySalesInvoiceBean.prdList}"
+								var="obj" itemLabel="#{obj.prdName}"
+								itemValue="#{obj.prdCatlogId}" />
+							<p:ajax listener="#{ModifySalesInvoiceBean.onProductChange}"
+								update="itemTable,growl,grid_prd" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="productCode" value="Product Code" />
+						<p:inputText id="productCode"
+							value="#{ModifySalesInvoiceBean.prdCode}" disabled="true" />
+
+						<h:outputLabel for="curSTK" value="Current Stock Count " />
+						<p:inputText disabled="true" id="curSTK"
+							value="#{ModifySalesInvoiceBean.currentStockCount}">
+						</p:inputText>
+
+						<h:outputLabel for="description" value="Product Description " />
+						<p:inputTextarea disabled="true" rows="3" cols="21"
+							value="#{ModifySalesInvoiceBean.description}" autoResize="false"
+							id="description" />
+
+						<h:outputLabel for="unitPrice" value="Unit Price" />
+						<p:inputText id="unitPrice" disabled="true"
+							value="#{ModifySalesInvoiceBean.unitPrice}">
+							<f:validateLength maximum="30" for="unitPrice" />
+						</p:inputText>
+
+						<h:outputLabel for="quantity" value="Quantity *" />
+						<p:inputText id="quantity"
+							value="#{ModifySalesInvoiceBean.quantity}">
+							<f:validateLength maximum="30" for="quantity" />
+							<p:ajax event="keyup" update="total"
+								listener="#{ModifySalesInvoiceBean.handleKeyEventQty}" />
+						</p:inputText>
+
+						<h:outputLabel for="total" value="Total" />
+						<p:inputText id="total" disabled="true"
+							value="#{ModifySalesInvoiceBean.total}">
+							<f:validateLength maximum="30" for="total" />
+						</p:inputText>
+
+						<h:outputLabel for="discount" value="Discount " />
+						<p:inputText id="discount"
+							value="#{ModifySalesInvoiceBean.discount}">
+							<f:validateLength maximum="30" for="discount" />
+							<p:ajax event="keyup" update="netTotal"
+								listener="#{ModifySalesInvoiceBean.handleKeyEventDicnt}" />
+						</p:inputText>
+
+						<h:outputLabel for="netTotal" value="Net Total " />
+						<p:inputText id="netTotal" disabled="true"
+							value="#{ModifySalesInvoiceBean.netTotal}">
+							<f:validateLength maximum="30" for="netTotal" />
+						</p:inputText>
+
+						<h:outputLabel for="detRemark" value="Product Remark " />
+						<p:inputTextarea rows="3" cols="21"
+							value="#{ModifySalesInvoiceBean.detRemark}" autoResize="false"
+							id="detRemark" />
+
+						<p:commandButton value="Add To Cart" icon="ui-icon-check"
+							actionListener="#{ModifySalesInvoiceBean.addToCart}"
+							update="itemTable,growl,grid_prd" style="margin:0" />
+
+						<p:commandButton value="View SO" onstart="PF('Dialog').show()"
+							icon="ui-icon-search">
+						</p:commandButton>
+
+					</h:panelGrid>
+
+					<p:dialog widgetVar="Dialog" closeOnEscape="true" modal="false"
+						showEffect="clip" hideEffect="clip" draggable="true"
+						resizable="false" minimizable="true" height="500" width="975">
+						<p:panel id="sb">
+
+							<h:panelGrid columns="2">
+								<p:dataTable id="itemTable2" var="SoDetail"
+									value="#{ModifySalesInvoiceBean.soDetList}"
+									rowKey="#{SoDetail.soDetId}" editable="true"
+									emptyMessage="No Products found with given criteria"
+									resizableColumns="true" rows="10" paginator="true"
+									paginatorPosition="bottom"
+									paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+									rowsPerPageTemplate="10,20,50,100">
+									<f:facet name="header">
+           								 Products
+        							</f:facet>
+
+									<p:column headerText="Prd. Code"
+										filterBy="#{SoDetail.productCatalog.prdCode}"
+										sortBy="#{SoDetail.productCatalog.prdCode}"
+										filterMatchMode="contains" style="width:20%; font-size:14px; "
+										styleClass="wrap">
+										<h:outputText value="#{SoDetail.productCatalog.prdCode}"
+											styleClass="ensky_themetext" />
+									</p:column>
+
+									<p:column headerText="Product Name"
+										filterBy="#{SoDetail.productCatalog.prdName}"
+										sortBy="#{SoDetail.productCatalog.prdName}"
+										filterMatchMode="contains" style="width:30%; font-size:14px;"
+										styleClass="wrap">
+										<h:outputText value="#{SoDetail.productCatalog.prdName}"
+											styleClass="ensky_themetext" />
+									</p:column>
+
+									<p:column headerText="Prd. Remark"
+										filterBy="#{SoDetail.detRemark}"
+										sortBy="#{SoDetail.detRemark}" filterMatchMode="contains"
+										style="width:40%; font-size:14px;" styleClass="wrap">
+										<h:outputText value="#{SoDetail.detRemark}"
+											styleClass="ensky_themetext" />
+									</p:column>
+
+									<p:column headerText="Quantity" filterBy="#{SoDetail.quantity}"
+										sortBy="#{SoDetail.quantity}" filterMatchMode="contains"
+										style="width:15%; font-size:14px; " styleClass="wrap">
+										<h:outputText value="#{SoDetail.quantity}"
+											styleClass="ensky_themetext" />
+									</p:column>
+
+									<p:column selectionMode="single"
+										style="width:16px;text-align:center" />
+
+								</p:dataTable>
+							</h:panelGrid>
+						</p:panel>
+					</p:dialog>
+
+					<p:dataTable id="itemTable" var="SaleInvDetail"
+						value="#{ModifySalesInvoiceBean.displaySiDetList}"
+						rowKey="#{SaleInvDetail.saleInvDetId}" editable="true"
+						selection="#{ModifySalesInvoiceBean.selectedDetObj}"
+						emptyMessage="No Item found with given criteria"
+						resizableColumns="true" rows="10" paginator="true"
+						paginatorPosition="bottom"
+						paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+						rowsPerPageTemplate="10,20,50,100">
+						<f:facet name="header">
+           					 Products
+        				</f:facet>
+
+						<p:ajax event="rowEdit"
+							listener="#{ModifySalesInvoiceBean.onRowEdit}"
+							update=":form:growl, :form:itemTable" />
+						<p:ajax event="rowEditCancel"
+							listener="#{ModifySalesInvoiceBean.onRowCancel}"
+							update=":form:growl" />
+
+						<p:column headerText="Product Code"
+							filterBy="#{SaleInvDetail.productCatalog.prdCode}"
+							sortBy="#{SaleInvDetail.productCatalog.prdCode}"
+							filterMatchMode="contains" style="width:20%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.productCatalog.prdCode}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.productCatalog.prdCode}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Product Name"
+							filterBy="#{SaleInvDetail.productCatalog.prdName}"
+							sortBy="#{SaleInvDetail.productCatalog.prdName}"
+							filterMatchMode="contains" style="width:30%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.productCatalog.prdName}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.productCatalog.prdName}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Product Remark"
+							filterBy="#{SaleInvDetail.detRemark}"
+							sortBy="#{SaleInvDetail.detRemark}" filterMatchMode="contains"
+							style="width:40%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.detRemark}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{SaleInvDetail.detRemark}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Unit Price"
+							filterBy="#{SaleInvDetail.unitPrice}"
+							sortBy="#{SaleInvDetail.unitPrice}" filterMatchMode="contains"
+							style="width:15%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.unitPrice}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.unitPrice}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Quantity"
+							filterBy="#{SaleInvDetail.quantity}"
+							sortBy="#{SaleInvDetail.quantity}" filterMatchMode="contains"
+							style="width:15%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.quantity}" />
+								</f:facet>
+								<f:facet name="input">
+									<p:inputText value="#{SaleInvDetail.quantity}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Total" filterBy="#{SaleInvDetail.total}"
+							sortBy="#{SaleInvDetail.total}" filterMatchMode="contains"
+							style="width:15%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.total}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.total}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Discount"
+							filterBy="#{SaleInvDetail.discount}"
+							sortBy="#{SaleInvDetail.discount}" filterMatchMode="contains"
+							style="width:15%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.discount}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.discount}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column headerText="Net Total"
+							filterBy="#{SaleInvDetail.netTotal}"
+							sortBy="#{SaleInvDetail.netTotal}" filterMatchMode="contains"
+							style="width:15%;font-size:14px">
+							<p:cellEditor>
+								<f:facet name="output">
+									<h:outputText value="#{SaleInvDetail.netTotal}" />
+								</f:facet>
+								<f:facet name="input">
+									<h:outputText value="#{SaleInvDetail.netTotal}" />
+								</f:facet>
+							</p:cellEditor>
+						</p:column>
+
+						<p:column selectionMode="single"
+							style="width:16px;text-align:center" />
+
+						<f:facet name="footer">
+							<p:commandButton value="Delete"
+								actionListener="#{ModifySalesInvoiceBean.deleteProduct}"
+								update="itemTable" />
+						</f:facet>
+
+					</p:dataTable>
+				</p:panel>
+			</p:tab>
+
+			<p:tab id="confirm" title="Confirmation">
+				<p:panel id="confirmPnl">
+					<p:panel>
+						<h:panelGrid columns="2">
+							<h:outputLabel value="Name" styleClass="ensky_themetext" />
+							<h:outputLabel value="Helios (Pvt) Ltd."
+								styleClass="ensky_themetext" />
+
+							<h:outputLabel value="Address :" styleClass="ensky_themetext" />
+							<h:outputLabel value="No 103/2, Colombo Road, Gampaha."
+								styleClass="ensky_themetext" />
+
+							<h:outputLabel value="Tel :" styleClass="ensky_themetext" />
+							<h:outputLabel value=" 0112456852 / 0775268456"
+								styleClass="ensky_themetext" />
+
+							<h:outputLabel value="Email :" styleClass="ensky_themetext" />
+							<h:outputLabel value="info@helios.lk"
+								styleClass="ensky_themetext" />
+
+							<h:outputLabel value="Branch :" styleClass="ensky_themetext" />
+							<h:outputLabel value="Gampaha" styleClass="ensky_themetext" />
+						</h:panelGrid>
+					</p:panel>
+
+					<h:panelGrid columns="4" cellspacing="5" cellpadding="5">
+
+						<h:outputText
+							style="font-weight: bold;font-family: Times New Roman;font-size: 14px;"
+							value="#{ModifySalesInvoiceBean.hedding}"
+							styleClass="outputLabel" />
+
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						<h:outputText value="Sales Inv No :" styleClass="ensky_themetext" />
+						<h:outputText id="salesInvNo"
+							value="#{ModifySalesInvoiceBean.salesInvNo}"
+							styleClass="ensky_themetext" />
+
+						<h:outputText value="Customer Name : "
+							styleClass="ensky_themetext" />
+						<h:outputText styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.custName}" />
+
+						<h:outputText value="Ref SO No : " styleClass="ensky_themetext" />
+						<h:outputText styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.selectedSoId}" />
+
+						<h:outputText value="Address : " styleClass="ensky_themetext" />
+						<h:outputText disabled="true" styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.custAddress}" />
+
+						<h:outputText value="Invoice Date : " styleClass="ensky_themetext" />
+						<p:calendar value="#{ModifySalesInvoiceBean.invDate}"
+							disabled="true" />
+
+						<h:outputText value="City : " styleClass="ensky_themetext" />
+						<h:outputText styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.custCity}" />
+
+						<h:outputText value="Tel : " styleClass="ensky_themetext" />
+						<h:outputText styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.custMobile} / #{ModifySalesInvoiceBean.custPhonOffice}" />
+
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						<h:outputText value="Sub Total : " styleClass="ensky_themetext" />
+						<h:outputText id="subTot" styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.subTotal}" />
+
+						<h:outputText value="&#160;" />
+						<h:outputText value="&#160;" />
+
+						<h:outputText value="Grand Total : " styleClass="ensky_themetext" />
+						<h:outputText id="grandTot" styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.grandTotal}" />
+
+						<h:outputText value="Remark : " styleClass="ensky_themetext" />
+						<h:outputText styleClass="ensky_themetext"
+							value="#{ModifySalesInvoiceBean.hdrRemark}" />
+
+					</h:panelGrid>
+
+					<p:dataTable id="item" var="SaleInvDetail"
+						value="#{ModifySalesInvoiceBean.displaySiDetList}"
+						rowKey="#{SaleInvDetail.saleInvDetId}" editable="false"
+						emptyMessage="No Item found with given criteria">
+						<f:facet name="header">
+           					         Products
+        				            </f:facet>
+
+						<p:column headerText="Prd.Code" styleClass="wrap"
+							style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.productCatalog.prdCode}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Prd.Name" styleClass="wrap"
+							style="width:25%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.productCatalog.prdName}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Prd.Remark" styleClass="wrap"
+							style="width:25%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.detRemark}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Unit Price" style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.unitPrice}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Quantity" style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.quantity}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Total" style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.total}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Discount" style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.discount}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+						<p:column headerText="Net Total" style="width:15%;font-size:14px">
+							<h:outputText value="#{SaleInvDetail.netTotal}"
+								styleClass="ensky_themetext" />
+						</p:column>
+
+					</p:dataTable>
+					<p:spacer height="30" width="30" />
+					<h:panelGrid columns="5">
+						<h:outputLabel value="--------------------------" />
+						<p:spacer width="15" />
+						<h:outputLabel value="--------------------------" />
+						<p:spacer width="15" />
+						<h:outputLabel value="--------------------------" />
+						<h:outputLabel value="Prepared By" styleClass="ensky_theme" />
+						<p:spacer width="15" />
+						<h:outputLabel value="Checked By" styleClass="ensky_theme" />
+						<p:spacer width="15" />
+						<h:outputLabel value="Authorized By" styleClass="ensky_theme" />
+
+					</h:panelGrid>
+				</p:panel>
+				<!-- End of Confirmation panel -->
+				<p:panel style="border:none">
+					<h:panelGrid id="grid_con" columns="4" cellpadding="4">
+						<p:commandButton value="Submit"
+							disabled="#{ModifySalesInvoiceBean.hideSubmitBtn}"
+							actionListener="#{ModifySalesInvoiceBean.modifyInvoice}"
+							update="growl,grid_con,subTot,grandTot" process="@this" />
+
+						<p:commandButton value="Print" type="button" icon="ui-icon-print"
+							disabled="#{ModifySalesInvoiceBean.hidePrintBtn}">
+							<p:printer target="confirmPnl" />
+						</p:commandButton>
+
+						<p:button href="/xhtml/customer/modifySaleInv.xhtml?param=modify"
+							value="Home" icon="ui-icon-home" />
+					</h:panelGrid>
+				</p:panel>
+			</p:tab>
+		</p:wizard>
+	</ui:define>
+</ui:composition>

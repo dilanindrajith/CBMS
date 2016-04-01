@@ -1,0 +1,188 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	template="/templates/template.xhtml">
+	<ui:define name="metadata">
+
+	</ui:define>
+	<ui:define name="content">
+		<p:menubar>
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			<p:menuitem value="&#160;" />
+			 <p:menuitem value="&#160;" />
+			  <p:menuitem value="&#160;" />
+			   <p:menuitem value="&#160;" />
+			<p:menuitem value="Create"
+				url="createProductCatalog.xhtml?param=create" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Modify"
+				url="updateProductCatalog.xhtml?param=modify" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="Delete"
+				url="deleteProductCatalog.xhtml?param=delete" />
+				 <p:menuitem value="&#160;" />
+			<p:menuitem value="View" url="viewProductCatalog.xhtml?param=view" />
+		</p:menubar>
+
+		<h:form>
+			<p:growl id="growl" sticky="true" showDetail="true" />
+			<p:fieldset legend="Create Product Catalog" toggleable="false">
+
+				<p:panel id="prdCat">
+
+					<h:outputText value="&#160;" />
+					<div class="container">
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="productName" value="Product Name * " />
+							</div>
+							<div class="col-md-3">
+								<p:inputTextarea id="productName" rows="3" cols="21"
+									value="#{ProductCatalogBean.productName}" required="true"
+									requiredMessage="Product Name is Required"
+									placeholder="Max: 60 Characters"
+									validatorMessage="Product Name Max Limit Exceeded - Max Limit is 60 Characters">
+									<f:validateLength maximum="60" for="productName" />
+								</p:inputTextarea>
+							</div>
+							<div class="col-md-2">
+								<h:outputLabel value="Description " />
+							</div>
+							<div class="col-md-3">
+								<p:inputTextarea rows="3" cols="21"
+									value="#{ProductCatalogBean.description}" maxlength="150"
+									placeholder="Max: 150 Characters" autoResize="false"
+									validatorMessage="Description Max Limit Exceeded - Max Limit is 150 Characters">
+									<f:validateLength maximum="150" for="description" />
+								</p:inputTextarea>
+							</div>
+						</div>
+
+						<h:outputText value="&#160;" />
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="productCode" value="Product Code * " />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="productCode"
+									value="#{ProductCatalogBean.productCode}"
+									placeholder="Max: 30 Characters"
+									requiredMessage="Product Code is Required"
+									validatorMessage="Product Code Max Limit Exceeded - Max Limit is 30 Characters">
+									<f:validateLength maximum="30" for="productCode" />
+								</p:inputText>
+							</div>
+							<div class="col-md-2">
+								<h:outputLabel for="userDefCode" value="User Define Code" />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="userDefCode"
+									value="#{ProductCatalogBean.userDefineCode}"
+									placeholder="Max: 10 Characters"
+									validatorMessage="User Define Code Max Limit Exceeded - Max Limit is 10 Characters">
+									<f:validateLength maximum="10" for="userDefCode" />
+								</p:inputText>
+							</div>
+						</div>
+
+						<h:outputText value="&#160;" />
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="purchasePrice" value="Purchasing Price *" />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="purchasePrice" required="true"
+									requiredMessage="Please Enter Purchase Price"
+									value="#{ProductCatalogBean.purchasePrice}"
+									validatorMessage="Purchasing Price Max Limit Exceeded - Max Limit is 15 Characters">
+									<f:validateLength maximum="15" for="purchasePrice" />
+								</p:inputText>
+							</div>
+							<div class="col-md-2">
+								<h:outputLabel for="salePrice" value="Selling Price *" />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="salePrice" required="true"
+									requiredMessage="Please Enter Sale Price"
+									value="#{ProductCatalogBean.salePrice}"
+									validatorMessage="Selling Price Max Limit Exceeded - Max Limit is 15 Characters">
+									<f:validateLength maximum="15" for="salePrice" />
+								</p:inputText>
+							</div>
+						</div>
+
+						<h:outputText value="&#160;" />
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="warranty" value="Warranty (Weeks) " />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="warranty"
+									value="#{ProductCatalogBean.warranty}"
+									validatorMessage="warranty Max Limit Exceeded - Max Limit is 5 Digits">
+									<f:validateLength maximum="5" for="warranty" />
+								</p:inputText>
+							</div>
+							<div class="col-md-2">
+								<h:outputLabel for="shelfLife" value="Shelf Life " />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="shelfLife"
+									value="#{ProductCatalogBean.shelfLife}"
+									validatorMessage="Shelf Life Max Limit Exceeded - Max Limit is 3 Characters">
+									<f:validateLength maximum="3" for="shelfLife" />
+								</p:inputText>
+							</div>
+						</div>
+
+						<h:outputText value="&#160;" />
+						<div class="row">
+							<div class="col-md-2">
+								<h:outputLabel for="rackNo" value="Rack No " />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="rackNo" value="#{ProductCatalogBean.rackNo}"
+									validatorMessage="Rack No Max Limit Exceeded - Max Limit is 3 Characters">
+									<f:validateLength maximum="3" for="rackNo" />
+								</p:inputText>
+							</div>
+							<div class="col-md-2">
+								<h:outputLabel for="qty" value="Quantity *" />
+							</div>
+							<div class="col-md-3">
+								<p:inputText id="qty" required="true"
+									value="#{ProductCatalogBean.qty}"
+									validatorMessage="Quantity Max Limit Exceeded - Max Limit is 4 Characters">
+									<f:validateLength maximum="4" for="qty" />
+								</p:inputText>
+							</div>
+						</div>
+					</div>
+
+					<p:spacer width="0" height="10" />
+					<div class="btn-group inline">
+						<p:commandButton value="Create"
+							actionListener="#{ProductCatalogBean.createProductCatalog}"
+							icon="ui-icon-check" update="form,growl,prdCat" />
+					</div>
+					<p:spacer width="0" height="50" />
+					<div class="btn-group inline">
+						<p:commandButton value="Reset" icon="ui-icon-check" />
+					</div>
+				</p:panel>
+			</p:fieldset>
+		</h:form>
+	</ui:define>
+</ui:composition>
